@@ -64,7 +64,7 @@ class NN_tb3:
             # load NN
 
             current_dir_path = (
-                rospkg.RosPack().get_path("arena_ros") + "/scripts/"
+                rospkg.RosPack().get_path("arena-ros") + "/scripts/"
             )
             model_name = "advanced_agent2_best.dat"
             # model_name = "dqn_agent_best_fc_l2.dat"

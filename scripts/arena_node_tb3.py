@@ -138,7 +138,7 @@ class NN_tb3():
 
             observation = [distance]+[angle]+sample
             # load NN
-            current_dir_path = rospkg.RosPack().get_path('arena_ros') + "/scripts/"
+            current_dir_path = rospkg.RosPack().get_path('arena-ros') + "/scripts/"
             model_name = "dqn_agent_best_fc_l2.dat"
             model_path = current_dir_path + model_name
             net = fc.FC_DQN(num_observations, NUM_ACTIONS)

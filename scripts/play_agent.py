@@ -27,9 +27,9 @@ class NN_tb3:
     def __init__(self):
         print("[play_agent]: in init")
         self.sub_obs = rospy.Subscriber(
-            "/observation", Observation, self.cbObservation
+            "observation", Observation, self.cbObservation
         )
-        self.pub_twist = rospy.Publisher("/cmd_vel", Twist, queue_size=1)
+        self.pub_twist = rospy.Publisher("cmd_vel", Twist, queue_size=1)
 
     def goalReached(self):
         # how far ?
@@ -37,12 +37,12 @@ class NN_tb3:
         #     return False
         # else:
         #     return True
-        goal_reached = rospy.get_param("/bool_goal_reached")
+        goal_reached = rospy.get_param("bool_goal_reached")
 
         if not goal_reached:
             return False
         else:
-            return True
+            return False
 
     def stop_moving(self):
         twist = Twist()

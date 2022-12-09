@@ -63,9 +63,7 @@ class NN_tb3:
             net.train(False)
             # load NN
 
-            current_dir_path = (
-                rospkg.RosPack().get_path("arena-ros") + "/scripts/"
-            )
+            current_dir_path = rospkg.RosPack().get_path("arena-ros") + "/scripts/"
             model_name = "advanced_agent2_best.dat"
             # model_name = "dqn_agent_best_fc_l2.dat"
             model_path = current_dir_path + model_name
@@ -105,8 +103,8 @@ class NN_tb3:
         twist.linear.x = action_space[action][0]
         twist.angular.z = action_space[action][1]
 
-        print("action " + str(action) + ": " + str(action_space[action]))
-        print("twist: " + str([twist.linear.x, twist.angular.z]))
+        # print("action " + str(action) + ": " + str(action_space[action]))
+        # print("twist: " + str([twist.linear.x, twist.angular.z]))
         # print((sample))
         self.pub_twist.publish(twist)
 

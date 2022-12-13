@@ -30,15 +30,15 @@ class NN_tb3():
         self.sub_goal = Vector3()
         self.scan = LaserScan()
         # subs
-        self.sub_pose = rospy.Subscriber('/odom', Odometry, self.cbPose)
+        self.sub_pose = rospy.Subscriber('odom', Odometry, self.cbPose)
         self.sub_global_goal = rospy.Subscriber(
-            '/goal', PoseStamped, self.cbGlobalGoal)
+            'move_base_simple/goal', PoseStamped, self.cbGlobalGoal)
         self.sub_subgoal = rospy.Subscriber(
-            '/subgoal', PoseStamped, self.cbSubGoal)
+            'subgoal', PoseStamped, self.cbSubGoal)
         # self.sub_subgoal = rospy.Subscriber('/plan_manager/subgoal',PoseStamped, self.cbSubGoal)
-        self.sub_scan = rospy.Subscriber('/scan', LaserScan, self.cbScan)
+        self.sub_scan = rospy.Subscriber('scan', LaserScan, self.cbScan)
         # pubs
-        self.pub_twist = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
+        self.pub_twist = rospy.Publisher('cmd_vel', Twist, queue_size=1)
 
         rospy.sleep(5)
 
@@ -116,15 +116,7 @@ class NN_tb3():
             # lidarscan
             sample = np.asanyarray(self.scan.ranges)
 
-            path = rospkg.RosPack().get_path("arena-simulation-setup") + '/robot/' + \
-                f'{rospy.get_param("/model")}.model.yaml'
-
-            with open(path, "r") as fd:
-                robot_data = yaml.safe_load(fd)
-
-            for a in robot_data['plugins']:
-                if a['type'] == 'Laser':
-                    max_range = a['range']
+            max_range = rospy.get_param("laser/range")
 
             sample[np.isinf(sample)] = max_range
             sample[np.isnan(sample)] = max_range
